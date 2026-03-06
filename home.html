@@ -49,6 +49,93 @@
   </header>
   <!-- NAVBAR SECTION ENDS -->
 
+     <!-- MAIN CONTENT SECTION STARTS -->
+  <main class="w-11/12 mx-auto py-8">
+
+    <!-- Page Title -->
+    <div class="mb-6">
+      <h2 class="text-2xl font-bold">
+        <i class="fa-brands fa-github mr-2"></i>GitHub Issues
+      </h2>
+      <p class="text-gray-500 text-sm mt-1">Browse and manage all project issues</p>
+    </div>
+
+    <!-- TABS + COUNTS PANEL -->
+    <div class="bg-base-100 rounded-2xl shadow-sm overflow-hidden mb-6">
+
+      <!-- Tab Row -->
+      <div class="flex items-center justify-between px-4 pt-1 border-b border-base-200">
+
+        <!-- Tabs -->
+        <div class="flex gap-1">
+          <button
+            id="tab-all"
+            
+            class="inline-flex items-center gap-1 px-4 py-3 text-sm font-semibold cursor-pointer border-b-2 border-violet-600 text-violet-600 bg-transparent transition-all duration-150"
+          >
+            <i class="fa-solid fa-list"></i> All
+          </button>
+          <button
+            id="tab-open"
+           
+            class="inline-flex items-center gap-1 px-4 py-3 text-sm font-medium cursor-pointer border-b-2 border-transparent text-gray-500 hover:text-gray-800 hover:bg-base-200 bg-transparent transition-all duration-150"
+          >
+            <i class="fa-solid fa-circle-dot text-green-500"></i> Open
+          </button>
+          <button
+            id="tab-closed"
+            
+            class="inline-flex items-center gap-1 px-4 py-3 text-sm font-medium cursor-pointer border-b-2 border-transparent text-gray-500 hover:text-gray-800 hover:bg-base-200 bg-transparent transition-all duration-150"
+          >
+            <i class="fa-solid fa-circle-check text-purple-500"></i> Closed
+          </button>
+        </div>
+
+        <!-- Open & Closed count badges -->
+        <div class="flex items-center gap-4 pb-1">
+          <span  class="flex items-center gap-1 text-sm font-semibold text-green-600">
+            <i class="fa-solid fa-circle-dot"></i>
+            <span>Open</span>
+          </span>
+          <span  class="flex items-center gap-1 text-sm font-semibold text-purple-600">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>Closed</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- Filter label sub-row -->
+      <div class="px-4 py-2 flex items-center gap-2 text-xs text-bold-400 border-b border-base-200">
+        <div>
+          <img src="./assets/Aperture.png" alt="Filter Icon" class="w-8 h-8  rounded-full" />
+        </div>
+       <div>
+        <h2 id="filter-label" class="text-lg ">50 issues</h2>
+        <p class="text-gray-500 text-sm">Track and manage your project issues</p>
+       </div>
+      </div>
+
+    </div>
+
+    <!-- SPINNER -->
+    <div id="spinner" class="hidden flex justify-center items-center py-20">
+      <span class="loading loading-bars loading-lg text-primary"></span>
+    </div>
+
+    <!-- ISSUES GRID -->
+    <div id="issues-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+    </div>
+
+    <!-- FOR EMPTY STATE -->
+    <div id="empty-state" class="hidden text-center py-20">
+      <i class="fa-solid fa-circle-exclamation text-5xl text-gray-300 mb-4 block"></i>
+      <h3 class="text-xl font-bold text-gray-400">No issues found</h3>
+  
+    </div>
+
+  </main>
+
+
 
  
 
