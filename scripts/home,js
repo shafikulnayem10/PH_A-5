@@ -4,7 +4,6 @@ let currentTab = "all";
 const API_BASE = "https://phi-lab-server.vercel.app/api/v1/lab";
 
 
-// handle tab
 function handleTab(tab){
 
   currentTab = tab;
@@ -12,21 +11,44 @@ function handleTab(tab){
   const allBtn = document.getElementById("tab-all");
   const openBtn = document.getElementById("tab-open");
   const closedBtn = document.getElementById("tab-closed");
+  const filterLabel = document.getElementById("filter-label");
 
+  // remove active style
   allBtn.classList.remove("border-b-2","border-violet-600","text-violet-600");
   openBtn.classList.remove("border-b-2","border-violet-600","text-violet-600");
   closedBtn.classList.remove("border-b-2","border-violet-600","text-violet-600");
 
+  // add active style
   if(tab === "all"){
     allBtn.classList.add("border-b-2","border-violet-600","text-violet-600");
   }
-
-  if(tab === "open"){
+  else if(tab === "open"){
     openBtn.classList.add("border-b-2","border-violet-600","text-violet-600");
   }
-
-  if(tab === "closed"){
+  else if(tab === "closed"){
     closedBtn.classList.add("border-b-2","border-violet-600","text-violet-600");
+  }
+
+  // filter issues
+  if(tab === "all"){
+    filterLabel.textContent = `${allIssues.length} issues`;
+    displayIssues(allIssues);
+  }
+  else{
+
+    const filtered = allIssues.filter((issue) => {
+
+      if(issue.status && (issue.status.toLowerCase() === "open" || issue.status.toLowerCase() === "closed")){
+        return issue.status.toLowerCase() === tab;
+      }
+
+      return false;
+
+    });
+
+    filterLabel.textContent = `${filtered.length} issues`;
+    displayIssues(filtered);
+
   }
 
 }
@@ -419,7 +441,7 @@ const handleSearch = async (value) => {
     const res = await fetch(`${API_BASE}/issues/search?q=${value}`);
     const data = await res.json();
 
-   // let results = [];
+  
 
     if(data.data){
       allIssues = data.data;
