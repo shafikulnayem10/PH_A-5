@@ -21,32 +21,41 @@
 <body class="min-h-screen bg-base-200 font-[Outfit]">
 
   <!-- NAVBAR SECTION STARTS -->
-  <header class=" gap-2 sm: px-2  md:px-4 lg:px-9 py-4">
-    <div class="navbar bg-base-100 shadow-sm px-9 sm:gap-2 md:gap-4 lg:gap-6 rounded-2xl">
-      <div class="navbar-start mr-2 ">
-        <a class="flex items-center gap-2 cursor-pointer">
-          <img src="./assets/github-logo.png" alt="GitHub Logo" class="w-8 h-8" />
-          <span class="text-lg font-bold">Github Issues Tracker</span>
-        </a>
-      </div>
-      <div class="navbar-end gap-3  ">
-      
-        <div class="join  md:flex gap-1 ">
-          <input
-            id="input-search"
-            type="text"
-            placeholder="Search issues..."
-            class="input input-sm join-item bg-base-200  lg: w-56  rounded-2xl md:w-48 rounded-4xl sm:w-40 "
-          />
-          <button id="btn-search" class="btn btn-sm btn-primary join-item">
-            <i class="fa-solid fa-magnifying-glass"></i>
-          </button>
-        </div>
-     
-       
-      </div>
+  <header class="px-2 md:px-4 lg:px-9 py-4">
+  <div class="navbar bg-base-100 shadow-sm px-4 md:px-6 lg:px-9 gap-3 rounded-2xl">
+
+    <!-- left -->
+    <div class="navbar-start">
+      <a class="flex items-center gap-2 cursor-pointer">
+        <img src="./assets/github-logo.png" alt="GitHub Logo" class="w-8 h-8" />
+        <span class="text-sm sm:text-base md:text-lg font-bold">
+          Github Issues Tracker
+        </span>
+      </a>
     </div>
-  </header>
+
+    <!-- right -->
+    <div class="navbar-end">
+
+      <div class="flex items-center gap-1">
+
+        <input
+          id="input-search"
+          type="text"
+          placeholder="Search issues..."
+          class="input input-sm bg-base-200 rounded-xl w-28 sm:w-40 md:w-48 lg:w-56"
+        />
+
+        <button id="btn-search" class="btn btn-sm btn-primary">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+</header>
   <!-- NAVBAR SECTION ENDS -->
 
      <!-- MAIN CONTENT SECTION STARTS -->
