@@ -26,10 +26,26 @@ function handleTab(tab) {
     closedBtn.classList.add("border-b-2","border-violet-600","text-violet-600");
   }
 }
+// ─── Spinner Helper Function 
+const manageSpinner = (show) => {
+  const spinner   = document.getElementById("spinner");
+  const container = document.getElementById("issues-container");
+  const empty     = document.getElementById("empty-state");
+
+  if (show === true) {
+    spinner.classList.remove("hidden");
+    container.classList.add("hidden");
+    empty.classList.add("hidden");
+  } else {
+    spinner.classList.add("hidden");
+    container.classList.remove("hidden");
+  }
+};
 // load all issues
 const loadAllIssues = async () => {
- 
+  manageSpinner(true);
   try {
+    
     const res  = await fetch(`${API_BASE}/issues`);
     const data = await res.json();
     allIssues  = data.data ;
@@ -38,7 +54,9 @@ const loadAllIssues = async () => {
     document.getElementById("filter-label").textContent =
       ` ${allIssues.length} issues`;
   } catch (err) {
+    manageSpinner(false);
     console.log("Failed to fetch issues:", err);
+    showEmpty("Failed to load issues. Please check your connection.");
    
     
   }
@@ -48,6 +66,7 @@ const displayIssues = (issues) => {
 
   const container = document.getElementById("issues-container");
   const empty = document.getElementById("empty-state");
+  manageSpinner(false);
 
   container.innerHTML = "";
 
@@ -76,4 +95,12 @@ const createIssueCard = (issue) => {
 
     return card;
 }
+
+const showEmpty = (msg = "No issues found") => {
+  const empty = document.getElementById("empty-state");
+  empty.querySelector("h3").textContent = msg;
+  empty.classList.remove("hidden");
+  document.getElementById("issues-container").classList.add("hidden");
+};
+
 loadAllIssues();
