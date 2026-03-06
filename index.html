@@ -34,11 +34,52 @@
       </p>
     </div>
     <!-- Logo Section Ends -->
+     
       <!-- Sign In Card Section Starts -->
-       <div>
-        <h1>SIGN in</h1>
+     <div class="card bg-base-100 shadow-2xl">
+      <div class="card-body">
 
-       </div>
+        <h2 class="card-title text-xl font-bold mb-2">Sign In</h2>
+
+        <fieldset class="fieldset space-y-1">
+
+          <label class="label font-semibold">Username</label>
+          <input
+            id="input-username"
+            type="text"
+            class="input rounded-full bg-base-200 w-full"
+            placeholder="Enter your username"
+            value="admin"
+            required
+          />
+
+          <br />
+
+          <label class="label font-semibold">Password</label>
+          <input
+            id="input-password"
+            type="password"
+            class="input rounded-full bg-base-200 w-full"
+            placeholder="Enter your password"
+            value="admin123"
+            required
+          />
+
+          <button id="login-btn" class="btn btn-primary mt-6 rounded-full w-full">
+            <i class="fa-solid fa-right-to-bracket"></i> Sign In
+          </button>
+
+        </fieldset>
+
+        <!-- Demo Credentials -->
+        <div class="mt-4 p-3 bg-base-200 rounded-xl text-sm text-gray-500 text-center">
+          <p class="font-semibold text-gray-600 mb-1">Demo Credentials</p>
+          <p>Username: <span class="font-mono font-bold text-gray-700">admin</span></p>
+          <p>Password: <span class="font-mono font-bold text-gray-700 ">admin123</span></p>
+        </div>
+
+      </div>
+    </div>
        <!-- Sign In Card Section Ends -->
 
 
