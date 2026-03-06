@@ -29,7 +29,14 @@ function handleTab(tab){
   }
 
   
-  const source = isSearching ? filteredIssues : allIssues;
+let source;
+
+if(isSearching==true){
+  source = filteredIssues;
+}
+else{
+  source = allIssues;
+}
 
   if(tab === "all"){
     filterLabel.textContent = `${source.length} issues`;
