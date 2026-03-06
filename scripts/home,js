@@ -348,7 +348,7 @@ const loadIssueDetail = async (id) => {
 };
 
 
-// modal display
+// single issue modal display
 const displayIssueDetail = (issue) => {
 
 const content = document.getElementById("modal-content");
@@ -390,6 +390,58 @@ const content = document.getElementById("modal-content");
   `;
 
 };
+
+// search implementation
+
+document.getElementById("btn-search").addEventListener("click", function () {
+  const value = document.getElementById("input-search").value;
+  handleSearch(value);
+});
+
+
+
+const handleSearch = async (value) => {
+
+  value = value.trim();
+
+  if(value === ""){
+    handleTab(currentTab);
+    return;
+  }
+
+  manageSpinner(true);
+
+  document.getElementById("filter-label").textContent =
+    `Search results for "${value}"`;
+
+  try{
+
+    const res = await fetch(`${API_BASE}/issues/search?q=${value}`);
+    const data = await res.json();
+
+   // let results = [];
+
+    if(data.data){
+      allIssues = data.data;
+    document.getElementById("filter-label").textContent =`${allIssues.length} issues`;
+    }else{
+      allIssues = data;
+        document.getElementById("filter-label").textContent =`${allIssues.length} issues`;
+
+    }
+
+    displayIssues(results);
+
+  }
+  catch(err){
+
+    console.log("Search failed", err);
+    manageSpinner(false);
+
+  }
+
+};
+
 
 
 loadAllIssues();
