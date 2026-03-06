@@ -70,6 +70,7 @@
         <div class="flex gap-1">
           <button
             id="tab-all"
+            onclick="handleTab('all')"
             
             class="inline-flex items-center gap-1 px-4 py-3 text-sm font-semibold cursor-pointer border-b-2 border-violet-600 text-violet-600 bg-transparent transition-all duration-150"
           >
@@ -77,6 +78,7 @@
           </button>
           <button
             id="tab-open"
+            onclick="handleTab('open')"
            
             class="inline-flex items-center gap-1 px-4 py-3 text-sm font-medium cursor-pointer border-b-2 border-transparent text-gray-500 hover:text-gray-800 hover:bg-base-200 bg-transparent transition-all duration-150"
           >
@@ -84,7 +86,7 @@
           </button>
           <button
             id="tab-closed"
-            
+            onclick="handleTab('closed')"
             class="inline-flex items-center gap-1 px-4 py-3 text-sm font-medium cursor-pointer border-b-2 border-transparent text-gray-500 hover:text-gray-800 hover:bg-base-200 bg-transparent transition-all duration-150"
           >
             <i class="fa-solid fa-circle-check text-purple-500"></i> Closed
