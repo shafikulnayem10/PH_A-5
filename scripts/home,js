@@ -1,6 +1,7 @@
 let allIssues = [];
+let filteredIssues = [];
 let currentTab = "all";
-
+let isSearching = false;
 const API_BASE = "https://phi-lab-server.vercel.app/api/v1/lab";
 
 
@@ -13,12 +14,10 @@ function handleTab(tab){
   const closedBtn = document.getElementById("tab-closed");
   const filterLabel = document.getElementById("filter-label");
 
-  // remove active style
   allBtn.classList.remove("border-b-2","border-violet-600","text-violet-600");
   openBtn.classList.remove("border-b-2","border-violet-600","text-violet-600");
   closedBtn.classList.remove("border-b-2","border-violet-600","text-violet-600");
 
-  // add active style
   if(tab === "all"){
     allBtn.classList.add("border-b-2","border-violet-600","text-violet-600");
   }
@@ -29,26 +28,24 @@ function handleTab(tab){
     closedBtn.classList.add("border-b-2","border-violet-600","text-violet-600");
   }
 
-  // filter issues
+  
+  const source = isSearching ? filteredIssues : allIssues;
+
   if(tab === "all"){
-    filterLabel.textContent = `${allIssues.length} issues`;
-    displayIssues(allIssues);
+    filterLabel.textContent = `${source.length} issues`;
+    displayIssues(source);
   }
   else{
 
-    const filtered = allIssues.filter((issue) => {
-
-      if(issue.status && (issue.status.toLowerCase() === "open" || issue.status.toLowerCase() === "closed")){
+    const filtered = source.filter(issue => {
+      if(issue.status){
         return issue.status.toLowerCase() === tab;
       }
-
       return false;
-
     });
 
     filterLabel.textContent = `${filtered.length} issues`;
     displayIssues(filtered);
-
   }
 
 }
@@ -419,6 +416,8 @@ document.getElementById("btn-search").addEventListener("click", function () {
   const value = document.getElementById("input-search").value;
   handleSearch(value);
 });
+document.getElementById("input-search").addEventListener("keydown", e =>
+  e.key === "Enter" && handleSearch(e.target.value));
 
 
 
@@ -427,32 +426,24 @@ const handleSearch = async (value) => {
   value = value.trim();
 
   if(value === ""){
+    isSearching = false;
     handleTab(currentTab);
     return;
   }
 
   manageSpinner(true);
 
-  document.getElementById("filter-label").textContent =
-    `Search results for "${value}"`;
-
   try{
 
     const res = await fetch(`${API_BASE}/issues/search?q=${value}`);
     const data = await res.json();
 
-  
+    filteredIssues = data.data ? data.data : data;
 
-    if(data.data){
-      allIssues = data.data;
-    document.getElementById("filter-label").textContent =`${allIssues.length} issues`;
-    }else{
-      allIssues = data;
-        document.getElementById("filter-label").textContent =`${allIssues.length} issues`;
+    isSearching = true;
 
-    }
-
-    displayIssues(results);
+    
+    handleTab("all");
 
   }
   catch(err){
