@@ -11,7 +11,6 @@ function handleTab(tab) {
   const openBtn = document.getElementById("tab-open");
   const closedBtn = document.getElementById("tab-closed");
 
-
   allBtn.classList.remove("border-b-2","border-violet-600","text-violet-600");
   openBtn.classList.remove("border-b-2","border-violet-600","text-violet-600");
   closedBtn.classList.remove("border-b-2","border-violet-600","text-violet-600");
@@ -27,3 +26,54 @@ function handleTab(tab) {
     closedBtn.classList.add("border-b-2","border-violet-600","text-violet-600");
   }
 }
+// load all issues
+const loadAllIssues = async () => {
+ 
+  try {
+    const res  = await fetch(`${API_BASE}/issues`);
+    const data = await res.json();
+    allIssues  = data.data ;
+    
+    displayIssues(allIssues);
+    document.getElementById("filter-label").textContent =
+      ` ${allIssues.length} issues`;
+  } catch (err) {
+    console.log("Failed to fetch issues:", err);
+   
+    
+  }
+};
+// display issues in UI
+const displayIssues = (issues) => {
+
+  const container = document.getElementById("issues-container");
+  const empty = document.getElementById("empty-state");
+
+  container.innerHTML = "";
+
+  if (issues.length === 0) {
+    container.classList.add("hidden");
+    empty.classList.remove("hidden");
+  } else {
+    empty.classList.add("hidden");
+    container.classList.remove("hidden");
+
+    issues.forEach((issue) => {
+      const card = createIssueCard(issue);
+      container.appendChild(card);
+    });
+  }
+
+};
+const createIssueCard = (issue) => {
+    const card = document.createElement("div");
+    card.className = "bg-white p-4 rounded-lg shadow hover:shadow-md transition-shadow duration-150";
+
+    const title = document.createElement("h3");
+    title.className = "text-lg font-semibold mb-2";
+    title.textContent = issue.title;
+    card.appendChild(title);
+
+    return card;
+}
+loadAllIssues();
