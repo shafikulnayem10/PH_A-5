@@ -373,64 +373,71 @@ const loadIssueDetail = async (id) => {
 
 };
 
-
 // single issue modal display
 const displayIssueDetail = (issue) => {
 
 const content = document.getElementById("modal-content");
   
-  
-   
- let isOpen = false;
+let isOpen = false;
 
 if(issue.status && issue.status.toLowerCase() === "open"){
   isOpen = true;
 }
 
 let statusBadge = "";
+let statusText = "";   
 
-if(isOpen===true){
+if(isOpen === true){
+
   statusBadge = `
     <span class="bg-green-500 text-white px-3 py-1 rounded-md text-xs font-bold flex items-center gap-1">
       Opened <i class="fa-solid fa-caret-down"></i>
     </span>`;
-}else{
+
+  statusText = "Opened by";
+
+}
+else{
+
   statusBadge = `
     <span class="bg-purple-600 text-white px-3 py-1 rounded-md text-xs font-bold flex items-center gap-1">
       Closed <i class="fa-solid fa-caret-down"></i>
     </span>`;
+
+  statusText = "Closed by";
+
 }
 
-  content.innerHTML = `
-    <div class="space-y-6">
-      <h2 class="text-2xl font-bold text-[#1E293B]">${issue.title}</h2>
-      
-      <div class="flex items-center gap-3 text-sm text-[#64748B]">
-        ${statusBadge}
-        <span>Opened by <strong class="text-[#1E293B]">${issue.author}</strong> • ${new Date(issue.createdAt).toLocaleDateString()}</span>
+content.innerHTML = `
+  <div class="space-y-6">
+    <h2 class="text-2xl font-bold text-[#1E293B]">${issue.title}</h2>
+    
+    <div class="flex items-center gap-3 text-sm text-[#64748B]">
+      ${statusBadge}
+      <span>${statusText} <strong class="text-[#1E293B]">${issue.author}</strong> • ${new Date(issue.createdAt).toLocaleDateString()}</span>
+    </div>
+
+    <div class="flex flex-wrap gap-2">
+      ${issue.labels?.map(l =>{
+        return `<span class="bg-[#FFE4E6] text-[#E11D48] border border-[#FECDD3] px-2 py-0.5 rounded text-[10px] font-bold uppercase"># ${l}</span>`
+      }).join('')}
+    </div>
+
+    <p class="text-[#64748B] leading-relaxed border-b pb-6">${issue.description}</p>
+
+    <div class="grid grid-cols-2 gap-4">
+      <div class="bg-[#F8FAFC] p-4 rounded-xl border border-gray-100">
+        <p class="text-xs text-gray-400 mb-1 uppercase font-bold tracking-tighter">Assignee</p>
+        <p class="font-bold text-[#1E293B]">${issue.author}</p>
       </div>
 
-      <div class="flex flex-wrap gap-2">
-         ${issue.labels?.map(l =>{
-              return`<span class="bg-[#FFE4E6] text-[#E11D48] border border-[#FECDD3] px-2 py-0.5 rounded text-[10px] font-bold uppercase"># ${l}</span>`
-         }).join('')}
-      </div>
-
-      <p class="text-[#64748B] leading-relaxed border-b pb-6">${issue.description}</p>
-
-      <div class="grid grid-cols-2 gap-4">
-        <div class="bg-[#F8FAFC] p-4 rounded-xl border border-gray-100">
-          <p class="text-xs text-gray-400 mb-1 uppercase font-bold tracking-tighter">Assignee</p>
-          <p class="font-bold text-[#1E293B]">${issue.author}</p>
-        </div>
-        <div class="bg-[#F8FAFC] p-4 rounded-xl border border-gray-100">
-          <p class="text-xs text-gray-400 mb-1 uppercase font-bold tracking-tighter">Priority</p>
-          ${getPriorityBadge(issue.priority)}
-        </div>
+      <div class="bg-[#F8FAFC] p-4 rounded-xl border border-gray-100">
+        <p class="text-xs text-gray-400 mb-1 uppercase font-bold tracking-tighter">Priority</p>
+        ${getPriorityBadge(issue.priority)}
       </div>
     </div>
-  `;
-
+  </div>
+`;
 };
 
 // search implementation
