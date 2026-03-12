@@ -35,24 +35,29 @@
     </div>
 
     <!-- right -->
-    <div class="navbar-end">
+  <div class="navbar-end flex items-center gap-3">
 
-      <div class="flex items-center gap-1">
+  <div class="flex items-center gap-1">
 
-        <input
-          id="input-search"
-          type="text"
-          placeholder="Search issues..."
-          class="input input-sm bg-base-200 rounded-xl w-28 sm:w-40 md:w-48 lg:w-56"
-        />
+    <input
+      id="input-search"
+      type="text"
+      placeholder="Search issues..."
+      class="input input-sm bg-base-200 rounded-xl w-28 sm:w-40 md:w-48 lg:w-56"
+    />
 
-        <button id="btn-search" class="btn btn-sm btn-primary">
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </button>
+    <button id="btn-search" class="btn btn-sm btn-primary">
+      <i class="fa-solid fa-magnifying-glass"></i>
+    </button>
 
-      </div>
+  </div>
 
-    </div>
+  <!-- Logout Button -->
+  <button id="logout-btn" class="btn btn-sm btn-error">
+    <i class="fa-solid fa-right-from-bracket"></i> Logout
+  </button>
+
+</div>
 
   </div>
 </header>
@@ -169,7 +174,8 @@
   </dialog>
     <!-- ISSUE DETAIL MODAL SECTION ENDS -->
 
-  <script src="./scripts/home,js"></script>
+  <script src="./scripts/home.js"></script>
+  
 
 
 

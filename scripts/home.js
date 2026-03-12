@@ -1,3 +1,11 @@
+// for protect the home page
+const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+if (!isLoggedIn) {
+  window.location.href = "index.html";
+}
+
+
 let allIssues = [];
 let filteredIssues = [];
 let currentTab = "all";
@@ -484,6 +492,16 @@ const handleSearch = async (value) => {
   }
 
 };
+// logout functionality
+const logoutBtn = document.getElementById("logout-btn");
+
+logoutBtn.addEventListener("click", function () {
+
+  localStorage.removeItem("isLoggedIn");
+
+   window.location.assign("index.html");
+
+});
 
 
 
