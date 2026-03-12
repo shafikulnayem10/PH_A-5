@@ -4,7 +4,7 @@ A web-based GitHub Issues Tracker application that allows users to sign in and m
 
 ## 🌐 Live Demo
 
-🔗 [https://shafikulnayem10.github.io/PH_A-5/](https://my-github-issues-tracker.netlify.app/)
+🔗 [https://my-github-issues-tracker.netlify.app/](https://my-github-issues-tracker.netlify.app/)
 
 
 
